@@ -1,6 +1,8 @@
 from sqlalchemy import func
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()
 
@@ -19,3 +21,8 @@ class Game(Base):
         return f'Game(id={self.id}, ' + \
             f'title="{self.title}", ' + \
             f'platform="{self.platform})"'
+
+# Set up the engine and session
+engine = create_engine('sqlite:///seed_db.db')
+Session = sessionmaker(bind=engine)
+session = Session()
